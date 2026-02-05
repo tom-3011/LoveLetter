@@ -237,6 +237,32 @@ function unlock(){
   }
 }
 
+/* HEART MESSAGE ONLY */
+let currentAudio = null;
+
+heart.onclick = e => {
+  e.stopPropagation();
+
+  // Stop any audio that might still be playing
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0; // Reset the audio to the beginning
+  }
+
+  // Create the audio element and trigger the song
+  currentAudio = new Audio('lovestory.mp3');
+  currentAudio.play();
+
+  // Show the popup message
+  showPopup(`
+    <p>
+      Dudeeeeeeee<br>
+      <strong>I love youuuuu 💋💋💋</strong><br>
+      I can’t believe we are <strong>FIANCE-FIANCEE</strong> now 🥹
+    </p>
+  `);
+};
+
 /* POPUP CORE */
 let popupOpen = false;
 function showPopup(html){
@@ -248,19 +274,15 @@ function closePopup(){
   popupOverlay.classList.add("hidden");
   popupContent.innerHTML = "";
   popupOpen = false;
+
+  // Stop the audio when popup is closed
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
 }
 
-/* HEART MESSAGE ONLY */
-heart.onclick = e => {
-  e.stopPropagation();
-  showPopup(`
-    <p>
-      Dudeeeeeeee<br>
-      <strong>I love youuuuu 💋💋💋</strong><br>
-      I can’t believe we are <strong>FIANCE-FIANCEE</strong> now 🥹
-    </p>
-  `);
-};
+
 
 /* STORY LINES */
 const storyMessages = {

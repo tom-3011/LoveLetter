@@ -171,9 +171,8 @@ input {
 <div class="floating-layer"></div>
 
 <div class="card" id="lockScreen">
-  <h1>🔒 Private Page</h1>
-  <h2>This one’s just for us</h2>
-  <input type="password" id="passwordInput" placeholder="You know this 😉">
+  <h1>🔒 Private Page</h1>  
+  <input type="password" id="passwordInput" placeholder="Enter for 💋">
   <br>
   <button onclick="unlock()">Unlock</button>
   <div id="error" class="error"></div>
@@ -181,7 +180,7 @@ input {
 
 <div class="card hidden" id="content">
   <h1>Same Class. Same Church. Same Person. ❤️</h1>
-  <h2>Different timing. Better story.</h2>
+  <h2>When the stars finally aligned</h2>
 
   <div class="story">
     <div class="line" data-img="school.jpg">📚 Class 4–7: Knew she existed, didn’t know she’d matter this much.</div>
@@ -190,14 +189,14 @@ input {
     <div class="line" data-img="now.jpg">❤️ Now: Dating, somehow the best decision we almost didn’t make.</div>
   </div>
 
-  <div class="hint">Tap anything. Curiosity encouraged 👀</div>
+  <div class="hint">Tap anywhere 🌚</div>
 
   <div class="heart" id="heart">❤️</div><br>
 
   <button id="futureBtn">Click if you see a future here</button>
   <button class="fake-btn" id="fakeBtn">Do not click this</button>
 
-  <footer>Built slowly. On purpose. With love.</footer>
+  <footer>Built slowly. With love.</footer>
 </div>
 
 <div id="popupOverlay" class="popup-overlay hidden">
@@ -208,19 +207,22 @@ input {
 </div>
 
 <script>
-const PASSWORD = "20071999";
+const PASSWORD = "Tomismyfiance@123";
 
 const hints = [
-  "Hmm… close, but not emotionally close 😌",
-  "You know this. I *know* you know this.",
+  "Hmm… close, but Romeo might still be waiting 🚶‍♂️",
+  "You know this. I *know* you know this🚶‍♂️",
   "Try again. Slowly. Cutely.",
   "Not that. But I still like you.",
   "Wrong password. Right person ❤️",
-  "Nope. But the confidence? Attractive.",
-  "If guessing was flirting, this would work.",
-  "Okay now you’re just teasing me.",
+  "Nope. But the confidence? Attractive 🚶‍♂️",
+  "If guessing was flirting, this would work 🚶‍♂️",
+  "Okay now you’re just teasing me 🚶‍♂️",
   "Take a breath. Then type.",
-  "You unlocked my patience, not the page 😌"
+  "You unlocked my patience, not the page 🚶‍♂️",
+  "I got tired of waiting… but I’m still here for you 🚶‍♂️🎀",
+  "Speak now… or forever hold your guess 😘",
+  "Hints will now repeat… because I’m done coding this 🚶‍♂️"
 ];
 
 let hintIndex = 0;
@@ -253,10 +255,9 @@ heart.onclick = e => {
   e.stopPropagation();
   showPopup(`
     <p>
-      We missed each other for years...<br>
-      different paths, wrong turns, almost.<br>
-      And still…<br>
-      <strong>we found our way back.</strong>
+      Dudeeeeeeee<br>
+      <strong>I love youuuuu 💋💋💋</strong><br>
+      I can’t believe we are <strong>FIANCE-FIANCEE</strong> now 🥹
     </p>
   `);
 };
@@ -264,13 +265,13 @@ heart.onclick = e => {
 /* STORY LINES */
 const storyMessages = {
   "school.jpg":
-    "Some people are background characters for years… until they aren’t.",
+    "She was just in the background, now she’s my favorite part.",
   "church.jpeg":
-    "Turns out complaints were just early chapters of the story.",
+    "I complained, life laughed, now I’m completely in love. (This is the only picture of us we have related to church)",
   "hinge.jpg":
-    "One casual swipe. A not-so-casual connection.",
+    "Wasn’t looking for anything, just matched to catch up. One conversation later, it all felt right.",
   "now.jpg":
-    "This part still feels unreal. But it’s real."
+    "It still feels like a dream, but it’s real, and it’s us."
 };
 
 document.querySelectorAll(".line").forEach(l => {
@@ -292,8 +293,8 @@ futureBtn.onclick = e => {
   e.stopPropagation();
   showPopup(`<p style="line-height:1.5;">
     Not a proposal…<br>
-    Just <strong>me, choosing you. On my own.</strong><br>
-    Always. Because honestly, I wouldn’t want anyone else ❤️
+    Just <strong>me, choosing you. And being sure of that.</strong><br>
+    Because honestly, I wouldn’t want anyone else ❤️
   </p>`);
 };
 
@@ -301,10 +302,10 @@ fakeBtn.onclick = e => {
   e.stopPropagation();
   showPopup(`<p style="line-height:1.5;">
     I said <strong>don’t click</strong> 😌<br>
-    Zero self-control. Maximum charm.<br>
+    Zero self-control. Totally irresistible.<br>
     <strong>This is why I love you.</strong><br>
-    BTW you are naughty for doing this 😏<br><br>
-    <strong>Thank you for being this cute & irresistible</strong> 💖
+    Also… you’re way too naughty for doing it 😏<br><br>
+    <strong>Thanks for being this cute, and for making it impossible not to love you</strong> 💖
   </p>`);
 };
 
@@ -373,16 +374,33 @@ popupOverlay.addEventListener("click", e => {
 
 /* FLOATING HEARTS */
 const layer = document.querySelector(".floating-layer");
-setInterval(()=>{
+
+// Weighted emojis: ❤️ more common, 💌 medium, 💋 rare
+const emojis = [
+  "❤️", "❤️", "❤️",
+  "💌", "💌",      
+  "🎀"           
+];
+
+setInterval(() => {
   const h = document.createElement("div");
   h.className = "float";
-  h.textContent = Math.random()>0.8?"💌":"❤️";
-  h.style.left = Math.random()*100+"vw";
-  h.style.fontSize = 14+Math.random()*20+"px";
-  h.style.animationDuration = 6+Math.random()*6+"s";
+
+  // Pick a random emoji based on weight
+  const randIndex = Math.floor(Math.random() * emojis.length);
+  h.textContent = emojis[randIndex];
+
+  // Random position, size, and animation
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = 14 + Math.random() * 20 + "px";
+  h.style.animationDuration = 6 + Math.random() * 6 + "s";
+
   layer.appendChild(h);
-  setTimeout(()=>h.remove(),12000);
-},400);
+
+  // Remove after animation
+  setTimeout(() => h.remove(), 12000);
+}, 65);
+
 </script>
 
 </body>

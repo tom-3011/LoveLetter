@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Private. Just Us ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(120deg,#ffdde1,#ee9ca7,#ffd6e8,#ffb6c1);
+  background-size: 300% 300%;
+  animation: bgMove 14s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.floating-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.float {
+  position: absolute;
+  opacity: 0.75;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  20% { opacity: 0.8; }
+  to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+.card {
+  background: white;
+  border-radius: 26px;
+  padding: 28px 20px;
+  max-width: 720px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+h1 { font-size: 2rem; margin-bottom: 8px; }
+h2 { color: #666; font-weight: normal; margin-bottom: 20px; }
+
+.story { text-align: left; }
+
+.line {
+  background: #f6f6f6;
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.line:hover { background: #f0e0f0; }
+
+button {
+  margin-top: 18px;
+  padding: 12px 22px;
+  border-radius: 28px;
+  border: none;
+  background: #ff5e78;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+button:hover { transform: scale(1.05); }
+
+.fake-btn { background: #ddd; color: #444; }
+
+.heart { display: inline-block; font-size: 2rem; cursor: pointer; margin: 12px 0; }
+.hint { font-size: 0.85rem; color: #888; margin-top: 12px; }
+.hidden { display: none !important; }
+.reveal { margin-top: 20px; font-size: 1.05rem; }
+footer { margin-top: 24px; font-size: 0.8rem; color: #777; }
+
+input {
+  padding: 10px;
+  width: 80%;
+  max-width: 260px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 12px;
+  font-size: 1rem;
+}
+
+.error {
+  color: #ff5e78;
+  margin-top: 8px;
+  min-height: 22px;
+}
+
+/* POPUP */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 10px;
+}
+
+.popup {
+  background: white;
+  border-radius: 20px;
+  padding: 16px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  animation: popFade .35s ease;
+}
+
+@keyframes popFade {
+  from { transform: scale(.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.popup img {
+  width: 100%;
+  border-radius: 14px;
+}
+
+.close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* RESPONSIVE TEXT */
+@media(max-width:480px){
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1rem; }
+  .line { padding: 10px 12px; font-size: 0.95rem; }
+  button { padding: 10px 18px; font-size: 0.95rem; }
+  .heart { font-size: 1.8rem; }
+  input { padding: 8px; font-size: 0.95rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="floating-layer"></div>
+
+<div class="card" id="lockScreen">
+  <h1>🔒 Private Page</h1>
+  <h2>This one’s just for us</h2>
+  <input type="password" id="passwordInput" placeholder="You know this 😉">
+  <br>
+  <button onclick="unlock()">Unlock</button>
+  <div id="error" class="error"></div>
+</div>
+
+<div class="card hidden" id="content">
+  <h1>Same Class. Same Church. Same Person. ❤️</h1>
+  <h2>Different timing. Better story.</h2>
+
+  <div class="story">
+    <div class="line" data-img="school.jpg">📚 Class 4–7: Knew she existed, didn’t know she’d matter this much.</div>
+    <div class="line" data-img="church.jpeg">⛪ Catechism leaders: I complained about her. I’ve learned.</div>
+    <div class="line" data-img="hinge.jpg">📱 Hinge, March: Matched with her, said “why not?”, kept talking.</div>
+    <div class="line" data-img="now.jpg">❤️ Now: Dating, somehow the best decision we almost didn’t make.</div>
+  </div>
+
+  <div class="hint">Tap anything. Curiosity encouraged 👀</div>
+
+  <div class="heart" id="heart">❤️</div><br>
+
+  <button id="futureBtn">Click if you see a future here</button>
+  <button class="fake-btn" id="fakeBtn">Do not click this</button>
+
+  <footer>Built slowly. On purpose. With love.</footer>
+</div>
+
+<div id="popupOverlay" class="popup-overlay hidden">
+  <div class="popup" id="popupBox">
+    <!-- <div class="close" onclick="closePopup()">✖</div> -->
+    <div id="popupContent"></div>
+  </div>
+</div>
+
+<script>
+const PASSWORD = "20071999";
+
+const hints = [
+  "Hmm… close, but not emotionally close 😌",
+  "You know this. I *know* you know this.",
+  "Try again. Slowly. Cutely.",
+  "Not that. But I still like you.",
+  "Wrong password. Right person ❤️",
+  "Nope. But the confidence? Attractive.",
+  "If guessing was flirting, this would work.",
+  "Okay now you’re just teasing me.",
+  "Take a breath. Then type.",
+  "You unlocked my patience, not the page 😌"
+];
+
+let hintIndex = 0;
+
+function unlock(){
+  if(passwordInput.value === PASSWORD){
+    lockScreen.classList.add("hidden");
+    content.classList.remove("hidden");
+  } else {
+    error.textContent = hints[hintIndex];
+    hintIndex = (hintIndex + 1) % hints.length;
+  }
+}
+
+/* POPUP CORE */
+let popupOpen = false;
+function showPopup(html){
+  popupContent.innerHTML = html;
+  popupOverlay.classList.remove("hidden");
+  popupOpen = true;
+}
+function closePopup(){
+  popupOverlay.classList.add("hidden");
+  popupContent.innerHTML = "";
+  popupOpen = false;
+}
+
+/* HEART MESSAGE ONLY */
+heart.onclick = e => {
+  e.stopPropagation();
+  showPopup(`
+    <p>
+      We missed each other for years...<br>
+      different paths, wrong turns, almost.<br>
+      And still…<br>
+      <strong>we found our way back.</strong>
+    </p>
+  `);
+};
+
+/* STORY LINES */
+const storyMessages = {
+  "school.jpg":
+    "Some people are background characters for years… until they aren’t.",
+  "church.jpeg":
+    "Turns out complaints were just early chapters of the story.",
+  "hinge.jpg":
+    "One casual swipe. A not-so-casual connection.",
+  "now.jpg":
+    "This part still feels unreal. But it’s real."
+};
+
+document.querySelectorAll(".line").forEach(l => {
+  l.onclick = e => {
+    e.stopPropagation();
+
+    const img = l.dataset.img;
+    const msg = storyMessages[img] || "This was always part of us.";
+
+    showPopup(`
+      <img src="${img}">
+      <p style="margin-top:10px;color:#666;">${msg}</p>
+    `);
+  };
+});
+
+/* BUTTONS */
+futureBtn.onclick = e => {
+  e.stopPropagation();
+  showPopup(`<p style="line-height:1.5;">
+    Not a proposal…<br>
+    Just <strong>me, choosing you. On my own.</strong><br>
+    Always. Because honestly, I wouldn’t want anyone else ❤️
+  </p>`);
+};
+
+fakeBtn.onclick = e => {
+  e.stopPropagation();
+  showPopup(`<p style="line-height:1.5;">
+    I said <strong>don’t click</strong> 😌<br>
+    Zero self-control. Maximum charm.<br>
+    <strong>This is why I love you.</strong><br>
+    BTW you are naughty for doing this 😏<br><br>
+    <strong>Thank you for being this cute & irresistible</strong> 💖
+  </p>`);
+};
+
+/* CLICK IMAGES */
+const images = [
+  "1.jpeg",
+  "2.jpeg",
+  "3.jpeg",
+  "4.jpeg",
+  "5.jpeg",
+  "6.jpeg",
+  "7.jpeg",
+  "8.jpeg",
+  "9.jpeg",
+  "10.jpeg",
+  "11.jpeg",
+  "12.jpeg",
+  "13.jpeg",
+  "14.jpeg",
+  "15.jpeg",
+  "16.jpeg",
+  "17.jpeg",
+  "18.jpeg",
+  "19.jpeg",
+  "20.jpeg",
+  "21.jpeg",
+  "22.jpeg"
+];
+
+const animations = [
+  "popFade",
+  "slideUp",
+  "zoomIn"
+];
+
+let imgIndex = 0;
+let clickCount = 0;
+
+document.addEventListener("click", e=>{
+  if(
+    content.classList.contains("hidden") ||
+    popupOpen ||
+    e.target.closest("button") ||
+    e.target.closest(".line") ||
+    e.target.closest(".heart") ||
+    e.target.closest(".popup")
+  ) return;
+
+  clickCount++;
+  if(clickCount % 4 === 0) imgIndex = (imgIndex + 1) % images.length;
+
+  showPopup(`
+    <img src="${images[imgIndex]}" style="animation:${animations[imgIndex%animations.length]} .4s ease">
+  `);
+
+  imgIndex = (imgIndex + 1) % images.length;
+});
+
+// Close popup if click outside the popup box
+popupOverlay.addEventListener("click", e => {
+  if (e.target === popupOverlay) {
+    closePopup();
+  }
+  e.stopPropagation();
+});
+
+/* FLOATING HEARTS */
+const layer = document.querySelector(".floating-layer");
+setInterval(()=>{
+  const h = document.createElement("div");
+  h.className = "float";
+  h.textContent = Math.random()>0.8?"💌":"❤️";
+  h.style.left = Math.random()*100+"vw";
+  h.style.fontSize = 14+Math.random()*20+"px";
+  h.style.animationDuration = 6+Math.random()*6+"s";
+  layer.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+},400);
+</script>
+
+</body>
+</html>
